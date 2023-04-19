@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Loi Binom</title>
+</head>
+<body>
+	<h1 class="binom">Loi binom</h1>
+	<form id="myForm">
+		<label for="myName">Valeur pour n (entier) :</label>
+		<input type="int" id="n" name="name">
+		<label for="myName">Valeur pour p (float) :</label>
+		<input type="float" id="p" name="name">
+		<button type="button" onclick="lanceBinom()">Binom</button>
+
+		<!-- <input type="submit" value="Envoyer !"> -->
+	  </form>
+	
+</body>
+</html>
+<script>
+	//binom.addEventListener(MouseEvent)
+
+	//c'était pour afficher les resultats en fonction de ce que l'utilisateur rentre
+	// function lanceBinom(){}
+
+	tabProba()
+	tabFreq()
+
+
+
+	function prob_i(k, n, p){
+			return (fact(n)/(fact(k)*fact(n-k)))* Math.pow(p,k) * Math.pow((1-p), (n-k))
+		}
+		
+	function fact(nbr){
+		var i, nbr, f = 1;
+		for(i = 1; i <= nbr; i++)  
+		{
+			f = f * i;   // ou f *= i;
+		}  
+		return f;
+	}
+
+	//n nombre d'essai
+	//p prob
+
+	//methode pour prog
+	//je prends 1: 0
+	//je balance mon rand 
+	//si rand > p0 j'add p1
+	//si rand > p0 +p1 je rajouter p2
+	//si rand < p0 + p1 + p2 
+	//je dis que mon rand c'est p3
+
+	//au lieu de faire pleins de test sur chaque bout
+	//je fais une boucle jusqu'à ce que je dépasse
+
+	function binom(n, p){
+		let Sk = 0
+		let U = Math.random() //U
+		let k=0
+
+		// console.log("U : " + U)
+
+		while(U>Sk){
+				Sk += prob_i(k, n, p)
+				// console.log("Sk : " + Sk)
+				// console.log("prob_i : " + prob_i(k,n,p))
+				k++
+
+		}
+		
+
+		return k
+	}
+
+	function tabProba(){
+		var tabProba =[]
+		for(let i = 0; i < 15; i++){
+			tabProba[i]=prob_i(15, i, 0.3)
+		}
+
+		
+		
+		console.log("tab proba" +tabProba)
+	}
+
+	function tabFreq(){
+		var tabFreq=[]
+		for(let i = 0; i<15; i++){
+			tabFreq[i]= 0
+		}
+		
+		for(let rep = 0; rep < 1000; rep++){
+			let indice = binom(15, 0.3)
+			let val = tabFreq[indice]
+			// console.log("indice" + indice)
+			tabFreq[indice]=val+1
+			// console.log("tab freq[indice]"+ tabFreq[indice] + "|" + "tabfreq[indice] +1" +tabFreq[indice]+1)
+			
+			// console.log("type : " + typeof tabFreq[indice])
+			// console.log("val : " + typeof val)
+			// // console.log("tab freq[indice] : "+ tabFreq[Number(indice)])
+			// console.log("tab freq" +tabFreq)
+
+		}
+
+		for(let i = 0; i<15; i++){
+			tabFreq[i]= tabFreq[i]/1000
+		}
+
+		console.log("tab fred" +tabFreq)
+
+		
+
+	}
+
+	console.log(binom(15, 0.3))
+
+</script>
