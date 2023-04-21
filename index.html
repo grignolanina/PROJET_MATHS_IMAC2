@@ -31,7 +31,7 @@
 
 
 
-	function prob_i(k, n, p){
+	function prob_binom(k, n, p){
 			return (fact(n)/(fact(k)*fact(n-k)))* Math.pow(p,k) * Math.pow((1-p), (n-k))
 		}
 		
@@ -63,12 +63,8 @@
 		let U = Math.random() //U
 		let k=0
 
-		// console.log("U : " + U)
-
 		while(U>Sk){
-				Sk += prob_i(k, n, p)
-				// console.log("Sk : " + Sk)
-				// console.log("prob_i : " + prob_i(k,n,p))
+				Sk += prob_binom(k, n, p)
 				k++
 
 		}
@@ -80,39 +76,33 @@
 	function tabProba(){
 		var tabProba =[]
 		for(let i = 0; i < 15; i++){
-			tabProba[i]=prob_i(15, i, 0.3)
+			tabProba[i]=prob_binom(i, 15, 0.3)
 		}
 
 		
 		
-		console.log("tab proba" +tabProba)
+		console.log("tab proba : ", tabProba)
 	}
 
 	function tabFreq(){
 		var tabFreq=[]
+		const nbExperience = 100000
 		for(let i = 0; i<15; i++){
 			tabFreq[i]= 0
 		}
 		
-		for(let rep = 0; rep < 1000; rep++){
+		for(let rep = 0; rep < nbExperience; rep++){
 			let indice = binom(15, 0.3)
 			let val = tabFreq[indice]
-			// console.log("indice" + indice)
 			tabFreq[indice]=val+1
-			// console.log("tab freq[indice]"+ tabFreq[indice] + "|" + "tabfreq[indice] +1" +tabFreq[indice]+1)
-			
-			// console.log("type : " + typeof tabFreq[indice])
-			// console.log("val : " + typeof val)
-			// // console.log("tab freq[indice] : "+ tabFreq[Number(indice)])
-			// console.log("tab freq" +tabFreq)
 
 		}
 
 		for(let i = 0; i<15; i++){
-			tabFreq[i]= tabFreq[i]/1000
+			tabFreq[i]= tabFreq[i]/nbExperience
 		}
 
-		console.log("tab fred" +tabFreq)
+		console.log("tab fred : ", tabFreq)
 
 		
 
