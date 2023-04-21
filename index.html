@@ -87,7 +87,7 @@
 		
 		for(let rep = 0; rep < nbExperience; rep++){
 			//nous renvoie un entier entre 0 et n grâce à la loi binomiale
-			let indice = binom(n, p)
+			let indice = binom(n, p)-1
 			
 			let val = tabFreq[indice]
 			tabFreq[indice]=val+1
@@ -145,7 +145,7 @@
 
 	}
 
-	displayBinom(15, 0.3, 1000000)
+	displayBinom(15, 0.3, 100000)
 	displayGeom(0.4)
 	
 
