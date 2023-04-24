@@ -124,6 +124,25 @@
 		return k
 	}
 
+
+	function prob_uniform(N){
+		return 1/N
+	}
+
+
+	function uniform(N){
+		let Sk = 0
+		let U = Math.random() //U
+		let k=0
+
+		while(U>Sk){
+				Sk += prob_uniform(N)
+				k++
+		}
+		console.log("U = ", U ,"proba unif : ", k)
+		return k
+	}
+
 	
 	function displayGeom(p){
 	let k = geometric(p);
@@ -145,8 +164,9 @@
 
 	}
 
-	displayBinom(15, 0.3, 100000)
-	displayGeom(0.4)
+	// displayBinom(15, 0.3, 100000)
+	// displayGeom(0.4)
+	uniform(10)
 	
 
 </script>

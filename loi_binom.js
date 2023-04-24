@@ -43,9 +43,6 @@ function tabFreq(){
     }
 
     console.log("tab fred : ", tabFreq)
-
-    
-
 }
 
 console.log(binom(15, 0.3))
