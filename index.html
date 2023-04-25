@@ -4,169 +4,114 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Loi Binom</title>
+	<link rel="stylesheet" href="style.css">
+	<title>Guess RGB</title>
 </head>
 <body>
-	<h1 class="binom">Loi binom</h1>
-	<form id="myForm">
-		<label for="myName">Valeur pour n (entier) :</label>
-		<input type="int" id="n" name="name">
-		<label for="myName">Valeur pour p (float) :</label>
-		<input type="float" id="p" name="name">
-		<button type="button" onclick="lanceBinom()">Binom</button>
+	<main>
+		<h1 class="guess_title">GUESS THE RGB !</h1>
+		<h2>Choisissez les lois qui régissent le jeu</h2>
 
-		<!-- <input type="submit" value="Envoyer !"> -->
-	  </form>
-	
+		<!-- <section class="choix">
+			<div class="choix_color rouge">
+				<h3>Pour la couleur rouge</h3>
+				<div class="ligne_loi">
+					<button class="button_loi button_loi_rouge"  id="loi_binom_rouge" onclick="setActiveButton('loi_binom_rouge')" onclick="test()">Loi Binomiale</button>
+					<button class="button_loi button_loi_rouge"  id="loi_geo_rouge" onclick="setActiveButton('loi_geo_rouge')">Loi Géométrique</button>
+				</div>
+				<div class="ligne_loi">
+					<button class="button_loi button_loi_rouge"  id="loi_surp_rouge" onclick="setActiveButton('loi_surp_rouge')">Loi Surprise</button>
+					<button class="button_loi button_loi_rouge"  id="loi_uni_rouge" onclick="setActiveButton('loi_uni_rouge')">Loi Uniforme</button>
+				</div>
+			</div>
+			<div class="choix_color vert">
+				<h3>Pour la couleur vert</h3>
+				<div class="ligne_loi">
+					<button class="button_loi button_loi_vert"  id="loi_binom_vert" onclick="setActiveButton('loi_binom_vert')">Loi Binomiale</button>
+					<button class="button_loi button_loi_vert"  id="loi_geo_vert" onclick="setActiveButton('loi_geo_vert')">Loi Géométrique</button>
+				</div>
+				<div class="ligne_loi">
+					<button class="button_loi button_loi_vert"  id="loi_surp_vert" onclick="setActiveButton('loi_surp_vert')">Loi Surprise</button>
+					<button class="button_loi button_loi_vert"  id="loi_uni_vert" onclick="setActiveButton('loi_uni_vert')">Loi Uniforme</button>
+				</div>
+			</div>
+			<div class="choix_color bleu">
+				<h3>Pour la couleur bleu</h3>
+				<div class="ligne_loi">
+					<button class="button_loi button_loi_bleu" id="loi_binom_bleu" onclick="setActiveButton('loi_binom_bleu')">Loi Binomiale</button>
+					<button class="button_loi button_loi_bleu"  id="loi_geo_bleu" onclick="setActiveButton('loi_geo_bleu')">Loi Géométrique</button>
+				</div>
+				<div class="ligne_loi">
+					<button class="button_loi button_loi_bleu"  id="loi_surp_bleu" onclick="setActiveButton('loi_surp_bleu')">Loi Surprise</button>
+					<button class="button_loi button_loi_bleu"  id="loi_uni_bleu" onclick="setActiveButton('loi_uni_bleu')">Loi Uniforme</button>
+				</div>
+			</div>
+			<button class="button_valider" id="send_loi" onclick="" type="submit">Valider</button>
+
+		</section> -->
+			<form class="form_choix_loi">
+				<section class="choix">
+					<div class="choix_color rouge">
+						<h3>Pour la couleur rouge</h3>
+			
+						<label><input type="radio" name="rouge" value="binom">Loi Binomiale</label>
+						<label><input type="radio" name="rouge" value="geo">Loi Géométrique</label>
+						<label><input type="radio" name="rouge" value="surp">Loi Surprise</label>
+						<label><input type="radio" name="rouge" value="uni">Loi Uniforme</label>
+						 
+					</div>
+					<div class="choix_color vert">
+						<h3>Pour la couleur vert</h3>
+			
+						<label><input type="radio" name="vert" value="binom">Loi Binomiale</label>
+						<label><input type="radio" name="vert" value="geo">Loi Géométrique</label>
+						<label><input type="radio" name="vert" value="surp">Loi Surprise</label>
+						<label><input type="radio" name="vert" value="uni">Loi Uniforme</label>
+						 
+					</div>
+					<div class="choix_color bleu">
+						<h3>Pour la couleur bleu</h3>
+			
+						<label><input type="radio" name="bleu" value="binom">Loi Binomiale</label>
+						<label><input type="radio" name="bleu" value="geo">Loi Géométrique</label>
+						<label><input type="radio" name="bleu" value="surp">Loi Surprise</label>
+						<label><input type="radio" name="bleu" value="uni">Loi Uniforme</label>
+					</div>
+					<button class="button_valider" id="send_loi" type="submit">Valider</button>
+				</section>
+			</form>
+			
+
+
+
+		<h2>Trouve la bonne combinaise RGB</h2>
+		<section class="game">
+			<div id="carre_color"></div>
+			<div class="choix_user">
+				<h3>Les valeurs sont comprises entre 0 et 255</h3>
+				<form class="couleur_joueur">
+					<label for="red">Rouge:</label>
+					<input type="number" id="red" name="red" min="0" max="255">
+					<label for="green">Vert:</label>
+					<input type="number" id="green" name="green" min="0" max="255">
+					<label for="blue">Bleu:</label>
+					<input type="number" id="blue" name="blue" min="0" max="255">
+					<button class="button_valider" type="submit">Valider</button>
+				  </form>
+
+			</div>
+
+
+
+		</section>
+		<div class="recommencer">
+			<button class="button_recommencer" type="submit">Recommencer</button>
+		</div>
+
+
+
+	</main>
+
 </body>
 </html>
-<script>
-	//binom.addEventListener(MouseEvent)
-
-	//c'était pour afficher les resultats en fonction de ce que l'utilisateur rentre
-	// function lanceBinom(){}
-
-	// tabProba()
-	// tabFreq()
-
-
-
-	function prob_binom(k, n, p){
-			return (fact(n)/(fact(k)*fact(n-k)))* Math.pow(p,k) * Math.pow((1-p), (n-k))
-		}
-
-	
-		
-	function fact(nbr){
-		var i, nbr, f = 1;
-		for(i = 1; i <= nbr; i++)  
-		{
-			f = f * i;   // ou f *= i;
-		}  
-		return f;
-	}
-
-	//n nombre d'essai
-	//p prob
-
-	//methode pour prog
-	//je prends 1: 0
-	//je balance mon rand 
-	//si rand > p0 j'add p1
-	//si rand > p0 +p1 je rajouter p2
-	//si rand < p0 + p1 + p2 
-	//je dis que mon rand c'est p3
-
-	//au lieu de faire pleins de test sur chaque bout
-	//je fais une boucle jusqu'à ce que je dépasse
-
-	function binom(n, p){
-		let Sk = 0
-		let U = Math.random() //U entre 0 et 1 
-		let k=0
-
-		while(U>Sk){
-				Sk += prob_binom(k, n, p)
-				k++
-
-		}
-		return k
-	}
-
-	function binomTabProba(n,p){
-		var tabProba =[]
-		for(let i = 0; i < n; i++){
-			tabProba[i]=prob_binom(i, n, p)
-		}
-		return tabProba
-		//console.log("tab proba : ", tabProba)
-	}
-
-	function binomTabFreq(n, p, nbExperience){
-		var tabFreq = new Array(n).fill(0);
-		
-		for(let rep = 0; rep < nbExperience; rep++){
-			//nous renvoie un entier entre 0 et n grâce à la loi binomiale
-			let indice = binom(n, p)-1
-			
-			let val = tabFreq[indice]
-			tabFreq[indice]=val+1
-
-		}
-
-		for(let i = 0; i<n; i++){
-			tabFreq[i]= tabFreq[i]/nbExperience
-		}
-
-		return tabFreq
-
-		//console.log("tab fred : ", tabFreq)
-
-		
-
-	}
-
-	function prob_geometric(p,k){
-		return p*(Math.pow(1-p, k-1))
-	}
-
-
-	function geometric(p){
-		let Sk = 0
-		let U = Math.random() //U
-		let k=0
-
-		while(U>Sk){
-				Sk += prob_geometric(p, k)
-				k++
-		}
-		console.log("U = ", U ,"proba geo : ", k)
-		return k
-	}
-
-
-	function prob_uniform(N){
-		return 1/N
-	}
-
-
-	function uniform(N){
-		let Sk = 0
-		let U = Math.random() //U
-		let k=0
-
-		while(U>Sk){
-				Sk += prob_uniform(N)
-				k++
-		}
-		console.log("U = ", U ,"proba unif : ", k)
-		return k
-	}
-
-	
-	function displayGeom(p){
-	let k = geometric(p);
-	let prob_k = prob_geometric(p, k)
-	console.log("LOI GEOMETRIQUE : ")
-	console.log("Numero tiré k = " , k)
-	console.log("Probabilité d'avoir k : ", prob_k)
-
-	}
-
-	function displayBinom(n, p, nbExperience){
-		let k = binom(n,p);
-		let tabProbaBinom = binomTabProba(n,p)
-		let freqObtenues = binomTabFreq(n,p,nbExperience)
-		console.log("LOI BINOMIALE : ")
-		console.log("Numero tiré k = " , k)
-		console.log("Tableau des probabilité correspondant = " , tabProbaBinom)
-		console.log("Tableau des fréquences obtenues = " , freqObtenues)
-
-	}
-
-	// displayBinom(15, 0.3, 100000)
-	// displayGeom(0.4)
-	uniform(10)
-	
-
-</script>
+<script src="main.js"></script>

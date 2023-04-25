@@ -1,0 +1,173 @@
+* {
+	margin: 0;
+	background-color: black;
+	color:white;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main{
+	/* display: flex;
+	flex-direction: column; */
+	/* align-items: center; */
+	border: solid 2px #8f8ce6;
+	height: 80vh;
+	padding: 2%;
+	margin: 2%;
+}
+
+h1 {
+	text-align: center;
+	display: block;
+	margin-top: -45px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 25%;
+}
+
+h2{
+	margin-top: 2%;
+	font-size: 1.1em;
+}
+
+.choix{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-top: 2%;
+	flex-wrap: wrap;
+	/* align-items: center; */
+}
+
+
+
+
+.choix_color {
+	display: flex;
+	flex-direction: column;
+	/* border: solid 1px red; */
+	align-items: center;
+	/* justify-content: space-around; */
+	/* margin: 0 10%; */
+	padding: 0 2%;
+	flex-wrap: wrap;
+
+
+}
+
+button {
+	margin: 5%;
+	transition: background-color 0.3s ease-in-out; 
+
+}
+
+button:hover {
+	background-color: #514dc2;
+}
+
+
+
+.ligne_loi {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+
+}
+
+.button_loi {
+	background-color: #dfe6e0;
+	border: none;
+	color: black;
+	border-radius: 50px;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+.game{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-top: 2%;
+}
+#carre_color{
+	/* display: block; */
+	width: 200px;
+	height: 200px;
+	background-color: rebeccapurple;
+}
+
+/* form{
+	margin-top: 2%;
+} */
+
+input {
+	background-color: #dfe6e0;
+	border: none;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 12px;
+	padding: 10px 20px;
+
+	margin: 4px 2px;
+	border-radius: 50px;
+
+
+
+
+	color: black;
+
+}
+  
+  input:focus {
+	outline: none; 
+  }
+  
+
+
+.button_valider{
+	
+	background-color: #8f8ce6;
+	border: none;
+	color: black;
+	border-radius: 50px;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin: 4px 2px;
+	cursor: pointer;
+
+}
+
+.recommencer{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+}
+.button_recommencer{
+	
+	background-color: #8f8ce6;
+	border: none;
+	color: black;
+	border-radius: 50px;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin: 4px 2px;
+	cursor: pointer;
+
+}
+
+}
