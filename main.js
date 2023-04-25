@@ -139,6 +139,59 @@ function geometric(p){
 	return k
 }
 
+//LOI UNIFORME
+function prob_uniform(N){
+	return 1/N
+}
+
+
+function uniform(N){
+	let Sk = 0
+	let U = Math.random() //U
+	let k=0
+
+	while(U>Sk){
+			Sk += prob_uniform(N)
+			
+			k++
+	}
+	console.log("U = ", U ,"proba unif : ", k)
+	return k
+}
+
+function loi_sqrt(){
+	let Sk = 0
+	let U = Math.random() //U
+	let k=0
+	let step = 0.01
+
+	while(U>Sk){
+		Sk += Math.sqrt(step)
+		step += step
+		k++
+		console.log("Sk = ", Sk, "Step = ", step)
+	}
+	console.log("U = ", U ,"k donné : ", k)
+	return k
+}
+
+
+function loi_function(func){
+	let Sk = 0
+	let U = Math.random() //U
+	let k=0
+	let step = 0.01
+
+	while(U>Sk){
+		Sk += func(step)
+		step += step
+		k++
+		console.log("Sk = ", Sk, "Step = ", step)
+	}
+	console.log("U = ", U ,"k donné : ", k)
+	return k
+}
+
 
 function displayGeom(p){
 let k = geometric(p);
@@ -155,11 +208,21 @@ function displayBinom(n, p, nbExperience){
 	let freqObtenues = binomTabFreq(n,p,nbExperience)
 	console.log("LOI BINOMIALE : ")
 	console.log("Numero tiré k = " , k)
-	console.log("Tableau des probabilité correspondant = " , tabProbaBinom)
-	console.log("Tableau des fréquences obtenues = " , freqObtenues)
+	// console.log("Tableau des probabilité correspondant = " , tabProbaBinom)
+	// console.log("Tableau des fréquences obtenues = " , freqObtenues)
 
+}
+
+function displayUnif(N){
+	let k = uniform(N);
+	let prob_k = prob_uniform(N)
+	console.log("LOI UNIFORME : ")
+	console.log("Numero tiré k = " , k)
+	console.log("Probabilité d'avoir k : ", prob_k)
+	
 }
 
 displayBinom(15, 0.3, 100000)
 displayGeom(0.4)
+displayUnif(10)
 	
