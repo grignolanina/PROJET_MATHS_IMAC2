@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const formulaireCouleur = document.querySelector('.couleur_joueur');
 		formulaireCouleur.reset();
 
-		const carreSet = document.querySelector('#carre_color_Set');
+		const carreSet = document.querySelector('#carre_color_set');
 		carreSet.style.backgroundColor = '';
 
 		const carreFind = document.querySelector('#carre_color_find');
