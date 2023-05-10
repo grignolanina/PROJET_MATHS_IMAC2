@@ -175,7 +175,7 @@ function loi_sqrt(){
 	return k
 }
 
-
+//LOI SUR UNE FONCTION DONNEE EN PARAMETRE, ex : sin, sqrt..
 function loi_function(func){
 	let Sk = 0
 	let U = Math.random() //U
@@ -192,7 +192,7 @@ function loi_function(func){
 	return k
 }
 
-
+//FONCTIONS D'AFFICHAGE
 function displayGeom(p){
 let k = geometric(p);
 let prob_k = prob_geometric(p, k)
