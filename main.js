@@ -44,9 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //  * 				MATHS
 //  * 
 //  * */
-function prob_binom(k, n, p){
-		return (fact(n)/(fact(k)*fact(n-k)))* Math.pow(p,k) * Math.pow((1-p), (n-k))
-	}
+
 
 
 	
@@ -75,6 +73,10 @@ function fact(nbr){
 //au lieu de faire pleins de test sur chaque bout
 //je fais une boucle jusqu'à ce que je dépasse
 
+function prob_binom(k, n, p){
+	return (fact(n)/(fact(k)*fact(n-k)))* Math.pow(p,k) * Math.pow((1-p), (n-k))
+}
+
 function binom(n, p){
 	let Sk = 0
 	let U = Math.random() //U entre 0 et 1 
@@ -85,6 +87,7 @@ function binom(n, p){
 			k++
 
 	}
+	console.log("U= ", U, "k= ", k)
 	return k
 }
 
@@ -121,76 +124,89 @@ function binomTabFreq(n, p, nbExperience){
 
 }
 
-function prob_geometric(p,k){
-	return p*(Math.pow(1-p, k-1))
+//LOI DE POISSON
+function esp_poisson(lambda){
+	return lambda
 }
-
-
-function geometric(p){
+//les valeurs sont bizarres
+function loi_poisson(lambda){
 	let Sk = 0
 	let U = Math.random() //U
 	let k=0
+	let prob = (Math.pow(lambda, k)/fact(k)) * Math.exp(-lambda)
 
 	while(U>Sk){
-			Sk += prob_geometric(p, k)
+			Sk += prob
 			k++
 	}
-	console.log("U = ", U ,"proba geo : ", k)
+
+	console.log("U = ", U ,"proba poisson : ", k, "Espérance = ", esp_poisson(lambda))
 	return k
 }
+
+
 
 //LOI UNIFORME
-function prob_uniform(N){
-	return 1/N
+
+//Espérance de la loi uniforme, représente la valeur moyenne
+function esp_uniforme(N){
+	return (N+1)/2
 }
 
-
-function uniform(N){
+function loi_uniforme(N){
 	let Sk = 0
 	let U = Math.random() //U
 	let k=0
 
 	while(U>Sk){
-			Sk += prob_uniform(N)
-			
+			Sk += 1/N
 			k++
 	}
-	console.log("U = ", U ,"proba unif : ", k)
+	console.log("U = ", U ,"proba unif : ", k, "Espérance = ", esp_uniforme(N))
 	return k
 }
 
-function loi_sqrt(){
-	let Sk = 0
-	let U = Math.random() //U
-	let k=0
-	let step = 0.01
 
-	while(U>Sk){
-		Sk += Math.sqrt(step)
-		step += step
-		k++
-		console.log("Sk = ", Sk, "Step = ", step)
+
+
+//LOI BETA CONTINUE PAR METHODE DU REJET
+function esp_beta(a,b){
+	return a/a+b
+  }
+
+function loi_beta(a, b) {
+	const MAX_ITERATIONS = 10000; // Nombre maximal d'itérations pour éviter une boucle infinie
+	let iteration = 0;
+  
+	while (iteration < MAX_ITERATIONS) {
+	  const u = Math.random(); // Échantillon d'une loi uniforme entre 0 et 1
+	  const v = Math.random(); // Échantillon d'une loi uniforme entre 0 et 1
+  
+	  const x = Math.pow(u, 1 / a);
+	  const y = Math.pow(v, 1 / b);
+  
+	  if (x + y <= 1) {
+		// Accepter l'échantillon
+		let result = x / (x + y)
+		
+
+		//Mettre le resultat entre 0 et 255 
+		result = Math.round(result * 255)
+
+		console.log("U = ", u, " V = ", v, "loi beta : ", result, "Espérance = ", esp_beta(a,b))
+		return result;
+	  }
+  
+	  iteration++;
 	}
-	console.log("U = ", U ,"k donné : ", k)
-	return k
-}
+  
+	// Si aucune valeur acceptée n'a été trouvée après le nombre maximal d'itérations
+	console.error("Échec de génération d'un échantillon selon la loi bêta.");
+	return null;
+  }
 
-//LOI SUR UNE FONCTION DONNEE EN PARAMETRE, ex : sin, sqrt..
-function loi_function(func){
-	let Sk = 0
-	let U = Math.random() //U
-	let k=0
-	let step = 0.01
+ 
 
-	while(U>Sk){
-		Sk += func(step)
-		step += step
-		k++
-		console.log("Sk = ", Sk, "Step = ", step)
-	}
-	console.log("U = ", U ,"k donné : ", k)
-	return k
-}
 
 //FONCTIONS D'AFFICHAGE
 function displayGeom(p){
@@ -199,7 +215,6 @@ let prob_k = prob_geometric(p, k)
 console.log("LOI GEOMETRIQUE : ")
 console.log("Numero tiré k = " , k)
 console.log("Probabilité d'avoir k : ", prob_k)
-
 }
 
 function displayBinom(n, p, nbExperience){
@@ -213,16 +228,12 @@ function displayBinom(n, p, nbExperience){
 
 }
 
-function displayUnif(N){
-	let k = uniform(N);
-	let prob_k = prob_uniform(N)
-	console.log("LOI UNIFORME : ")
-	console.log("Numero tiré k = " , k)
-	console.log("Probabilité d'avoir k : ", prob_k)
-	
-}
 
-displayBinom(15, 0.3, 100000)
-displayGeom(0.4)
-displayUnif(10)
+// displayBinom(15, 0.3, 100000)
+// displayGeom(0.4)
+// displayUnif(10)
+
+loi_poisson(5)
+loi_uniforme(255)
+loi_beta(0.5,0.5)
 	
