@@ -11,44 +11,6 @@
 	<main>
 		<h1 class="guess_title">GUESS THE RGB !</h1>
 		<h2>Choisissez les lois qui régissent le jeu</h2>
-
-		<!-- <section class="choix">
-			<div class="choix_color rouge">
-				<h3>Pour la couleur rouge</h3>
-				<div class="ligne_loi">
-					<button class="button_loi button_loi_rouge"  id="loi_binom_rouge" onclick="setActiveButton('loi_binom_rouge')" onclick="test()">Loi Binomiale</button>
-					<button class="button_loi button_loi_rouge"  id="loi_geo_rouge" onclick="setActiveButton('loi_geo_rouge')">Loi Géométrique</button>
-				</div>
-				<div class="ligne_loi">
-					<button class="button_loi button_loi_rouge"  id="loi_surp_rouge" onclick="setActiveButton('loi_surp_rouge')">Loi Surprise</button>
-					<button class="button_loi button_loi_rouge"  id="loi_uni_rouge" onclick="setActiveButton('loi_uni_rouge')">Loi Uniforme</button>
-				</div>
-			</div>
-			<div class="choix_color vert">
-				<h3>Pour la couleur vert</h3>
-				<div class="ligne_loi">
-					<button class="button_loi button_loi_vert"  id="loi_binom_vert" onclick="setActiveButton('loi_binom_vert')">Loi Binomiale</button>
-					<button class="button_loi button_loi_vert"  id="loi_geo_vert" onclick="setActiveButton('loi_geo_vert')">Loi Géométrique</button>
-				</div>
-				<div class="ligne_loi">
-					<button class="button_loi button_loi_vert"  id="loi_surp_vert" onclick="setActiveButton('loi_surp_vert')">Loi Surprise</button>
-					<button class="button_loi button_loi_vert"  id="loi_uni_vert" onclick="setActiveButton('loi_uni_vert')">Loi Uniforme</button>
-				</div>
-			</div>
-			<div class="choix_color bleu">
-				<h3>Pour la couleur bleu</h3>
-				<div class="ligne_loi">
-					<button class="button_loi button_loi_bleu" id="loi_binom_bleu" onclick="setActiveButton('loi_binom_bleu')">Loi Binomiale</button>
-					<button class="button_loi button_loi_bleu"  id="loi_geo_bleu" onclick="setActiveButton('loi_geo_bleu')">Loi Géométrique</button>
-				</div>
-				<div class="ligne_loi">
-					<button class="button_loi button_loi_bleu"  id="loi_surp_bleu" onclick="setActiveButton('loi_surp_bleu')">Loi Surprise</button>
-					<button class="button_loi button_loi_bleu"  id="loi_uni_bleu" onclick="setActiveButton('loi_uni_bleu')">Loi Uniforme</button>
-				</div>
-			</div>
-			<button class="button_valider" id="send_loi" onclick="" type="submit">Valider</button>
-
-		</section> -->
 			<form class="form_choix_loi">
 				<section class="choix">
 					<div class="choix_color rouge">
@@ -84,9 +46,10 @@
 
 
 
-		<h2>Trouve la bonne combinaise RGB</h2>
+		<h2>Trouve la bonne combinaison RGB</h2>
 		<section class="game">
-			<div id="carre_color"></div>
+			<div id="carre_color_set"></div>
+			<div id="carre_color_find"></div>
 			<div class="choix_user">
 				<h3>Les valeurs sont comprises entre 0 et 255</h3>
 				<form class="couleur_joueur">

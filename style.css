@@ -94,11 +94,20 @@ button:hover {
 	justify-content: space-around;
 	margin-top: 2%;
 }
-#carre_color{
+#carre_color_set{
 	/* display: block; */
-	width: 200px;
-	height: 200px;
-	background-color: rebeccapurple;
+	width: 150px;
+	height: 150px;
+	border: 2px solid grey;
+	background-color: rgb(0, 0, 0);
+}
+
+#carre_color_find{
+	/* display: block; */
+	width: 150px;
+	height: 150px;
+	border: 2px dotted grey;
+	background-color: rgb(0, 0, 0);
 }
 
 /* form{
@@ -167,7 +176,5 @@ input {
 	font-size: 12px;
 	margin: 4px 2px;
 	cursor: pointer;
-
-}
 
 }
