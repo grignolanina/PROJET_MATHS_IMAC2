@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		id = "carre_color_find"
 
-		if (chance < 5) {
+		if (chance < 10) {
 			changerCouleur(redValue, greenValue, blueValue, id);
 			verifWin(redValue, greenValue, blueValue);
 			chance++
@@ -224,7 +224,6 @@ function binomTabFreq(n, p, nbExperience) {
 function esp_poisson(lambda) {
 	return lambda
 }
-//les valeurs sont bizarres
 function loi_poisson(lambda) {
 	let Sk = 0
 	let U = Math.random() //U
@@ -261,6 +260,15 @@ function loi_uniforme(N) {
 	}
 	console.log("U = ", U, "proba unif : ", k, "Espérance = ", esp_uniforme(N))
 	return k
+}
+
+function loi_logistique(){
+	const U = Math.random();
+	const scale = 255 / (1 + Math.exp(1));
+	const shift = -0.5 * scale;
+	const res = Math.round(Math.abs(scale * (Math.log10(U / (1 - U))) + shift));
+	console.log("U =", U, "proba logistique:", res);
+	return res;
 }
 
 
@@ -339,3 +347,4 @@ function displayBinom(n, p, nbExperience) {
 loi_poisson(5)
 loi_uniforme(255)
 loi_beta(0.5, 0.5)
+loi_logistique()
