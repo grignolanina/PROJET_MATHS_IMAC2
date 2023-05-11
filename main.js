@@ -62,25 +62,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		/**
 		 * rajouter ici toutes l'attribution des couleurs par les lois
 		 */
-		if(loiRouge.value == 'poisson'){
-			loiRouge = loi_poisson(lambda)
-		}
-		else if(loiRouge.value == 'beta'){
-			loiRouge = loi_beta(a,b)
-		}
-		else if(loiRouge.value == 'uni'){
-			loiRouge = loi_uniforme(N)
-		}
-		//à changer avec la dernière loi
-		else if(loiRouge.value == 'surp'){
-			loiRouge = loi_uniforme(N)
-		}
-	
+		const r = valeurCouleur(loiRouge)
+		const g = valeurCouleur(loiVert)
+		const b = valeurCouleur(loiBleu)
+		
+		console.log("r : ", r, "g : ", g, "b : ", b)
 
 
 		id = "carre_color_set"
 		//param = les couleurs définie par les lois
-		changerCouleur(loiRouge, greenLoi, blueLoi, id)
+		changerCouleur(r, g,b, id)
 	});
 
 
@@ -121,6 +112,23 @@ document.addEventListener('DOMContentLoaded', function () {
 		chance = 0;
 	});
 });
+
+function valeurCouleur(loiCouleur) {
+	if(loiCouleur.value == 'poisson'){
+		loiCouleur = loi_poisson(lambda)
+	}
+	else if(loiCouleur.value == 'beta'){
+		loiCouleur = loi_beta(a,b)
+	}
+	else if(loiCouleur.value == 'uni'){
+		loiCouleur = loi_uniforme(N)
+	}
+	//à changer avec la dernière loi
+	else if(loiCouleur.value == 'logis'){
+		loiCouleur = loi_logistique()
+	}
+	return loiCouleur
+}
 
 function changerCouleur(redValue, greenValue, blueValue, id) {
 	let newColor = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
@@ -344,7 +352,7 @@ function displayBinom(n, p, nbExperience) {
 // displayGeom(0.4)
 // displayUnif(10)
 
-loi_poisson(5)
-loi_uniforme(255)
-loi_beta(0.5, 0.5)
-loi_logistique()
+// loi_poisson(5)
+// loi_uniforme(255)
+// loi_beta(0.5, 0.5)
+// loi_logistique()
