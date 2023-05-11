@@ -11,9 +11,13 @@
  * initialisation des valeurs 
  */
 //------couleurs définie par les lois (carreSet)
-let loiRouge = 0;
-let loiVert = 0;
-let loiBleu = 0;
+let loiRouge = " ";
+let loiVert = " ";
+let loiBleu = " ";
+
+let redToFind = 0
+let greenToFind = 0
+let blueToFind = 0
 
 //------couleurs définies par l'utilisateur (carreFind)
 let redValue = 0;
@@ -24,9 +28,9 @@ let chance = 0;
 
 
 //debug
-let redLoi = 102;
-let greenLoi = 51;
-let blueLoi = 153;
+// let redLoi = 102;
+// let greenLoi = 51;
+// let blueLoi = 153;
 
 //Paramètres pour les lois
 let lambda = 5
@@ -62,16 +66,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		/**
 		 * rajouter ici toutes l'attribution des couleurs par les lois
 		 */
-		const r = valeurCouleur(loiRouge)
-		const g = valeurCouleur(loiVert)
-		const b = valeurCouleur(loiBleu)
+		redToFind = valeurCouleur(loiRouge)
+		greenToFind = valeurCouleur(loiVert)
+		blueToFind = valeurCouleur(loiBleu)
 		
-		console.log("r : ", r, "g : ", g, "b : ", b)
+		console.log("r : ", redToFind, "g : ", greenToFind, "b : ", blueToFind )
 
 
 		id = "carre_color_set"
 		//param = les couleurs définie par les lois
-		changerCouleur(r, g,b, id)
+		changerCouleur(redToFind, greenToFind, blueToFind , id)
 	});
 
 
@@ -79,15 +83,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	//entrée les valeurs de couleurs
 	document.querySelector('.couleur_joueur').addEventListener('submit', function (event) {
 		event.preventDefault();
-		let redValue = document.getElementById('red').value;
-		let greenValue = document.getElementById('green').value;
-		let blueValue = document.getElementById('blue').value;
+		let redValue = parseInt(document.getElementById('red').value);
+		let greenValue = parseInt(document.getElementById('green').value);
+		let blueValue = parseInt(document.getElementById('blue').value);
+
+		
 
 		id = "carre_color_find"
 
 		if (chance < 10) {
 			changerCouleur(redValue, greenValue, blueValue, id);
-			verifWin(redValue, greenValue, blueValue);
+			verifWin(redValue, greenValue, blueValue, redToFind, greenToFind, blueToFind);
 			chance++
 			console.log(chance)
 		} else {
@@ -113,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
+//retourne un entier entre 0 et 255 correspondant à la loi selectionnée
 function valeurCouleur(loiCouleur) {
 	if(loiCouleur.value == 'poisson'){
 		loiCouleur = loi_poisson(lambda)
@@ -136,8 +143,8 @@ function changerCouleur(redValue, greenValue, blueValue, id) {
 	carre.style.backgroundColor = newColor;
 }
 
-function verifWin(redValue, greenValue, blueValue) {
-	if (redLoi == redValue && greenLoi == greenValue && blueLoi == blueValue) {
+function verifWin(redValue, greenValue, blueValue, r, g, b) {
+	if (r == redValue && g == greenValue && b == blueValue) {
 		alert('Victoire !');
 	}
 }
