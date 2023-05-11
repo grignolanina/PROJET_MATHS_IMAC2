@@ -28,7 +28,11 @@ let redLoi = 102;
 let greenLoi = 51;
 let blueLoi = 153;
 
-
+//Paramètres pour les lois
+let lambda = 5
+let a = 0.5
+let b = 0.5
+let N = 255
 
 
 
@@ -58,11 +62,25 @@ document.addEventListener('DOMContentLoaded', function () {
 		/**
 		 * rajouter ici toutes l'attribution des couleurs par les lois
 		 */
+		if(loiRouge.value == 'poisson'){
+			loiRouge = loi_poisson(lambda)
+		}
+		else if(loiRouge.value == 'beta'){
+			loiRouge = loi_beta(a,b)
+		}
+		else if(loiRouge.value == 'uni'){
+			loiRouge = loi_uniforme(N)
+		}
+		//à changer avec la dernière loi
+		else if(loiRouge.value == 'surp'){
+			loiRouge = loi_uniforme(N)
+		}
+	
 
 
 		id = "carre_color_set"
 		//param = les couleurs définie par les lois
-		changerCouleur(redLoi, greenLoi, blueLoi, id)
+		changerCouleur(loiRouge, greenLoi, blueLoi, id)
 	});
 
 
@@ -211,11 +229,12 @@ function loi_poisson(lambda) {
 	let Sk = 0
 	let U = Math.random() //U
 	let k = 0
-	let prob = (Math.pow(lambda, k) / fact(k)) * Math.exp(-lambda)
+	let prob = (Math.pow(lambda, k) * Math.exp(-lambda))/ fact(k)
 
 	while (U > Sk) {
 		Sk += prob
 		k++
+		prob = (Math.pow(lambda, k) * Math.exp(-lambda))/ fact(k)
 	}
 
 	console.log("U = ", U, "proba poisson : ", k, "Espérance = ", esp_poisson(lambda))
@@ -249,8 +268,14 @@ function loi_uniforme(N) {
 
 //LOI BETA CONTINUE PAR METHODE DU REJET
 function esp_beta(a, b) {
-	return a / a + b
+	return a / (a + b)
 }
+
+function var_beta(a, b) {
+	const numerator = a * b;
+	const denominator = Math.pow(a + b, 2) * (a + b + 1);
+	return numerator / denominator;
+  }
 
 function loi_beta(a, b) {
 	const MAX_ITERATIONS = 10000; // Nombre maximal d'itérations pour éviter une boucle infinie
@@ -271,7 +296,7 @@ function loi_beta(a, b) {
 			//Mettre le resultat entre 0 et 255 
 			result = Math.round(result * 255)
 
-			console.log("U = ", u, " V = ", v, "loi beta : ", result, "Espérance = ", esp_beta(a, b))
+			console.log("U = ", u, " V = ", v, "loi beta : ", result, "Espérance = ", esp_beta(a, b), "Variance = ", var_beta(a,b))
 			return result;
 		}
 
