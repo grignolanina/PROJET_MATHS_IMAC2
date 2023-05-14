@@ -36,7 +36,7 @@ let chance = 0;
 let lambda = 5
 let a = 0.5
 let b = 0.5
-let N = 255
+let N = 256
 
 
 
@@ -185,6 +185,8 @@ function fact(nbr) {
 //au lieu de faire pleins de test sur chaque bout
 //je fais une boucle jusqu'à ce que je dépasse
 
+
+
 function prob_binom(k, n, p) {
 	return (fact(n) / (fact(k) * fact(n - k))) * Math.pow(p, k) * Math.pow((1 - p), (n - k))
 }
@@ -201,6 +203,12 @@ function binom(n, p) {
 	}
 	console.log("U= ", U, "k= ", k)
 	return k
+}
+
+function tailleCouleur(n,p){
+	const taillesCouleur = ["très petit", "petit", "moyen", "grand", "très grand"];
+	const indice = binom(n,p)
+	return taillesCouleur[indice]
 }
 
 function binomTabProba(n, p) {
@@ -267,7 +275,7 @@ function esp_uniforme(N) {
 function loi_uniforme(N) {
 	let Sk = 0
 	let U = Math.random() //U
-	let k = 0
+	let k = -1
 
 	while (U > Sk) {
 		Sk += 1 / N
@@ -277,6 +285,7 @@ function loi_uniforme(N) {
 	return k
 }
 
+
 function loi_logistique(){
 	const U = Math.random();
 	const scale = 255 / (1 + Math.exp(1));
@@ -285,8 +294,6 @@ function loi_logistique(){
 	console.log("U =", U, "proba logistique:", res);
 	return res;
 }
-
-
 
 
 //LOI BETA CONTINUE PAR METHODE DU REJET
@@ -355,7 +362,7 @@ function displayBinom(n, p, nbExperience) {
 }
 
 
-// displayBinom(15, 0.3, 100000)
+//displayBinom(4, 0.5, 100000)
 // displayGeom(0.4)
 // displayUnif(10)
 
@@ -363,3 +370,4 @@ function displayBinom(n, p, nbExperience) {
 // loi_uniforme(255)
 // loi_beta(0.5, 0.5)
 // loi_logistique()
+//tailleCouleur(4,0.5)
