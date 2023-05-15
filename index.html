@@ -53,13 +53,24 @@
 			<div id="carre_color_find"></div>
 			<div class="choix_user">
 				<h3>Les valeurs sont comprises entre 0 et 255</h3>
+				<p id="chance"></p>
 				<form class="couleur_joueur">
-					<label for="red">Rouge:</label>
-					<input type="number" id="red" name="red" min="0" max="255">
-					<label for="green">Vert:</label>
-					<input type="number" id="green" name="green" min="0" max="255">
-					<label for="blue">Bleu:</label>
-					<input type="number" id="blue" name="blue" min="0" max="255">
+					<div class="couleur_joueur_block">
+						<label for="red">Rouge:</label>
+						<input type="number" id="red" name="red" min="0" max="255">
+						<p class="indication" id="indicationRouge"></p>
+					</div>
+					<div class="couleur_joueur_block">
+						<label for="green">Vert:</label>
+						<input type="number" id="green" name="green" min="0" max="255">
+						<p class="indication" id="indicationVert"></p>
+					</div>
+					<div class="couleur_joueur_block">
+						<label for="blue">Bleu:</label>
+						<input type="number" id="blue" name="blue" min="0" max="255">
+						<p class="indication" id="indicationBleu"></p>
+					</div>
+					
 					<button class="button_valider" type="submit">Valider</button>
 				  </form>
 

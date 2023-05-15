@@ -98,16 +98,16 @@ button:hover {
 
 #carre_color_set{
 	/* display: block; */
-	width: 150px;
-	height: 150px;
+	/* width: 150px;
+	height: 150px; */
 	border: 2px solid grey;
 	background-color: rgb(0, 0, 0);
 }
 
 #carre_color_find{
 	/* display: block; */
-	width: 150px;
-	height: 150px;
+	/* width: 150px;
+	height: 150px; */
 	border: 2px dotted grey;
 	background-color: rgb(0, 0, 0);
 }
@@ -139,6 +139,23 @@ input {
   }
   
 
+.couleur_joueur{
+	display:flex;
+}
+
+.couleur_joueur_block{
+	display:flex;
+	align-items: center;
+}
+
+#chance{
+	color:#8f8ce668;
+	font-style: italic;
+}
+.indication {
+	padding: 20px 20px 20px 5px;
+	color: #8f8ce6;
+}
 
 .button_valider{
 	

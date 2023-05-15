@@ -38,10 +38,22 @@ let a = 0.5
 let b = 0.5
 let N = 256
 
-
+let n = 4
+let p = 0.5
 
 
 document.addEventListener('DOMContentLoaded', function () {
+	//taille carré
+	let taille = tailleCouleur(n, p)
+	console.log("taille : " + taille)
+	// let tailleFind = tailleCouleur(n, p)
+	const carreSet = document.querySelector('#carre_color_set')
+	const carreFind = document.querySelector('#carre_color_find')
+	carreSet.style.height = taille
+	carreSet.style.width = taille
+	carreFind.style.height = taille
+	carreFind.style.width = taille
+
 	//choix des lois
 	const form = document.querySelector('.form_choix_loi');
 	form.addEventListener('submit', function (event) {
@@ -69,13 +81,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		redToFind = valeurCouleur(loiRouge)
 		greenToFind = valeurCouleur(loiVert)
 		blueToFind = valeurCouleur(loiBleu)
-		
-		console.log("r : ", redToFind, "g : ", greenToFind, "b : ", blueToFind )
+
+		console.log("r : ", redToFind, "g : ", greenToFind, "b : ", blueToFind)
 
 
 		id = "carre_color_set"
 		//param = les couleurs définie par les lois
-		changerCouleur(redToFind, greenToFind, blueToFind , id)
+		changerCouleur(redToFind, greenToFind, blueToFind, id)
 	});
 
 
@@ -87,17 +99,25 @@ document.addEventListener('DOMContentLoaded', function () {
 		let greenValue = parseInt(document.getElementById('green').value);
 		let blueValue = parseInt(document.getElementById('blue').value);
 
-		
+
+		let nbChance = document.getElementById("chance")
+
+
 
 		id = "carre_color_find"
 
 		if (chance < 10) {
 			changerCouleur(redValue, greenValue, blueValue, id);
 			verifWin(redValue, greenValue, blueValue, redToFind, greenToFind, blueToFind);
-			chance++
+			checkRouge();
+			checkVert();
+			checkBleu();
+			chance++;
+			nbChance.textContent = "Nombre d'essai(s) restant(s) : " + (10 - (chance))
 			console.log(chance)
 		} else {
 			alert("Vous avez utilisé le nombre maximal d'essai !")
+			nbChance.textContent = "Relancer une partie pour re tester votre chance !"
 		}
 	})
 
@@ -121,17 +141,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //retourne un entier entre 0 et 255 correspondant à la loi selectionnée
 function valeurCouleur(loiCouleur) {
-	if(loiCouleur.value == 'poisson'){
+	if (loiCouleur.value == 'poisson') {
 		loiCouleur = loi_poisson(lambda)
 	}
-	else if(loiCouleur.value == 'beta'){
-		loiCouleur = loi_beta(a,b)
+	else if (loiCouleur.value == 'beta') {
+		loiCouleur = loi_beta(a, b)
 	}
-	else if(loiCouleur.value == 'uni'){
+	else if (loiCouleur.value == 'uni') {
 		loiCouleur = loi_uniforme(N)
 	}
 	//à changer avec la dernière loi
-	else if(loiCouleur.value == 'logis'){
+	else if (loiCouleur.value == 'logis') {
 		loiCouleur = loi_logistique()
 	}
 	return loiCouleur
@@ -149,11 +169,48 @@ function verifWin(redValue, greenValue, blueValue, r, g, b) {
 	}
 }
 
+function checkRouge() {
+	const rouge = document.getElementById("red").value
+	const indicationRouge = document.getElementById("indicationRouge")
 
-// function calculPoint(redValue, greenValue, blueValue, redLoi, greenLoi, blueLoi) {
+	let result = redToFind - rouge
 
-// }
+	if (result < 0) {
+		indicationRouge.textContent = "-"
+	} else if (result > 0) {
+		indicationRouge.textContent = "+"
+	} else {
+		indicationRouge.textContent = "="
+	}
+}
+function checkVert() {
+	const vert = document.getElementById("green").value
+	const indicationVert = document.getElementById("indicationVert")
 
+	let result = greenToFind - vert
+
+	if (result < 0) {
+		indicationVert.textContent = "-"
+	} else if (result > 0) {
+		indicationVert.textContent = "+"
+	} else {
+		indicationVert.textContent = "="
+	}
+}
+function checkBleu() {
+	const bleu = document.getElementById("blue").value
+	const indicationBleu = document.getElementById("indicationBleu")
+
+	let result = blueToFind - bleu
+
+	if (result < 0) {
+		indicationBleu.textContent = "-"
+	} else if (result > 0) {
+		indicationBleu.textContent = "+"
+	} else {
+		indicationBleu.textContent = "="
+	}
+}
 
 // /**
 //  * 
@@ -205,11 +262,31 @@ function binom(n, p) {
 	return k
 }
 
-function tailleCouleur(n,p){
+
+//défini la taille des carres de couleurs 
+function tailleCouleur(n, p) {
 	const taillesCouleur = ["très petit", "petit", "moyen", "grand", "très grand"];
-	const indice = binom(n,p)
-	return taillesCouleur[indice]
+	const indice = binom(n, p)
+	switch (taillesCouleur[indice - 1]) {
+		case ("très petit"):
+			return "20px"
+			break;
+		case ("petit"):
+			return "50px"
+			break;
+		case ("moyen"):
+			return "80px"
+			break;
+		case ("grand"):
+			return "110px"
+			break;
+		case ("très grand"):
+			return "150px"
+			break;
+	}
 }
+
+
 
 function binomTabProba(n, p) {
 	var tabProba = []
@@ -251,12 +328,12 @@ function loi_poisson(lambda) {
 	let Sk = 0
 	let U = Math.random() //U
 	let k = 0
-	let prob = (Math.pow(lambda, k) * Math.exp(-lambda))/ fact(k)
+	let prob = (Math.pow(lambda, k) * Math.exp(-lambda)) / fact(k)
 
 	while (U > Sk) {
 		Sk += prob
 		k++
-		prob = (Math.pow(lambda, k) * Math.exp(-lambda))/ fact(k)
+		prob = (Math.pow(lambda, k) * Math.exp(-lambda)) / fact(k)
 	}
 
 	console.log("U = ", U, "proba poisson : ", k, "Espérance = ", esp_poisson(lambda))
@@ -286,7 +363,7 @@ function loi_uniforme(N) {
 }
 
 
-function loi_logistique(){
+function loi_logistique() {
 	const U = Math.random();
 	const scale = 255 / (1 + Math.exp(1));
 	const shift = -0.5 * scale;
@@ -305,7 +382,7 @@ function var_beta(a, b) {
 	const numerator = a * b;
 	const denominator = Math.pow(a + b, 2) * (a + b + 1);
 	return numerator / denominator;
-  }
+}
 
 function loi_beta(a, b) {
 	const MAX_ITERATIONS = 10000; // Nombre maximal d'itérations pour éviter une boucle infinie
@@ -326,7 +403,7 @@ function loi_beta(a, b) {
 			//Mettre le resultat entre 0 et 255 
 			result = Math.round(result * 255)
 
-			console.log("U = ", u, " V = ", v, "loi beta : ", result, "Espérance = ", esp_beta(a, b), "Variance = ", var_beta(a,b))
+			console.log("U = ", u, " V = ", v, "loi beta : ", result, "Espérance = ", esp_beta(a, b), "Variance = ", var_beta(a, b))
 			return result;
 		}
 
