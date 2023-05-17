@@ -41,6 +41,10 @@ let N = 256
 let n = 4
 let p = 0.5
 
+//loi logistique
+const position = 127
+const echelle = 25
+
 
 document.addEventListener('DOMContentLoaded', function () {
 	//taille carré
@@ -152,7 +156,7 @@ function valeurCouleur(loiCouleur) {
 	}
 	//à changer avec la dernière loi
 	else if (loiCouleur.value == 'logis') {
-		loiCouleur = loi_logistique()
+		loiCouleur = loi_logistique(position, echelle)
 	}
 	return loiCouleur
 }
@@ -363,11 +367,14 @@ function loi_uniforme(N) {
 }
 
 
-function loi_logistique() {
+function loi_logistique(position,echelle) {
 	const U = Math.random();
-	const scale = 255 / (1 + Math.exp(1));
-	const shift = -0.5 * scale;
-	const res = Math.round(Math.abs(scale * (Math.log10(U / (1 - U))) + shift));
+	// const scale = 255 / (1 + Math.exp(1));
+	// const shift = -0.5 * 255;
+	//const res = Math.round(Math.abs(scale * (Math.log10(U / (1 - U))) + shift));
+	//const res = Math.round(Math.abs(Math.log10(U / (1 - U))) + 127.5);
+	const res = Math.round(Math.abs(echelle*Math.log2(U/(1-U)) + position))
+
 	console.log("U =", U, "proba logistique:", res);
 	return res;
 }
@@ -446,5 +453,5 @@ function displayBinom(n, p, nbExperience) {
 // loi_poisson(5)
 // loi_uniforme(255)
 // loi_beta(0.5, 0.5)
-// loi_logistique()
+//loi_logistique(127,25)
 //tailleCouleur(4,0.5)
