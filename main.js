@@ -42,7 +42,7 @@ let n = 4
 let p = 0.5
 
 //loi logistique
-const position = 127
+const position = 127.5
 const echelle = 25
 
 
@@ -369,10 +369,6 @@ function loi_uniforme(N) {
 
 function loi_logistique(position,echelle) {
 	const U = Math.random();
-	// const scale = 255 / (1 + Math.exp(1));
-	// const shift = -0.5 * 255;
-	//const res = Math.round(Math.abs(scale * (Math.log10(U / (1 - U))) + shift));
-	//const res = Math.round(Math.abs(Math.log10(U / (1 - U))) + 127.5);
 	const res = Math.round(Math.abs(echelle*Math.log2(U/(1-U)) + position))
 
 	console.log("U =", U, "proba logistique:", res);
