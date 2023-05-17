@@ -255,11 +255,12 @@ function prob_binom(k, n, p) {
 function binom(n, p) {
 	let Sk = 0
 	let U = Math.random() //U entre 0 et 1 
-	let k = 0
+	let k = -1
 
 	while (U > Sk) {
-		Sk += prob_binom(k, n, p)
 		k++
+		Sk += prob_binom(k, n, p)
+		
 
 	}
 	console.log("U= ", U, "k= ", k)
@@ -271,7 +272,7 @@ function binom(n, p) {
 function tailleCouleur(n, p) {
 	const taillesCouleur = ["très petit", "petit", "moyen", "grand", "très grand"];
 	const indice = binom(n, p)
-	switch (taillesCouleur[indice - 1]) {
+	switch (taillesCouleur[indice]) {
 		case ("très petit"):
 			return "20px"
 			break;
@@ -335,8 +336,8 @@ function loi_poisson(lambda) {
 	let prob = (Math.pow(lambda, k) * Math.exp(-lambda)) / fact(k)
 
 	while (U > Sk) {
-		Sk += prob
 		k++
+		Sk += prob
 		prob = (Math.pow(lambda, k) * Math.exp(-lambda)) / fact(k)
 	}
 
@@ -359,8 +360,9 @@ function loi_uniforme(N) {
 	let k = -1
 
 	while (U > Sk) {
-		Sk += 1 / N
 		k++
+		Sk += 1 / N
+		
 	}
 	console.log("U = ", U, "proba unif : ", k, "Espérance = ", esp_uniforme(N))
 	return k
