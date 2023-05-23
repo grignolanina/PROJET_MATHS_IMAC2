@@ -118,9 +118,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			checkBleu();
 			chance++;
 			nbChance.textContent = "Nombre d'essai(s) restant(s) : " + (10 - (chance))
-			console.log(chance)
 		} else {
-			alert("Vous avez utilisé le nombre maximal d'essai !")
+			alert("Vous avez utilisé le nombre maximal d'essai ! La bonne combinaison était : ( " + redToFind + ", " + greenToFind +", " + blueToFind+ " )")
 			nbChance.textContent = "Relancer une partie pour re tester votre chance !"
 		}
 	})
